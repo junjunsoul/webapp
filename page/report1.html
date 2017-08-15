@@ -1,0 +1,246 @@
+
+	<div class="filtrate">
+		<ul>
+			<li>
+				<span class="tj">条件1 <i class="fa fa-caret-down"></i></span>
+				<div class="info">
+					<ul>
+						<li>选项（1）</li>
+						<li>选项（2）</li>
+						<li>选项（3）</li>
+					</ul>
+					<div class="btn">
+						<span>重置</span>
+						<span>确定</span>
+					</div>
+				</div>
+			</li>
+			<li>
+				<span class="tj">条件2 <i class="fa fa-caret-down"></i></span>
+				<div class="info">
+					<ul>
+						<li>选项（1）</li>
+						<li>选项（2）</li>
+					</ul>
+					<div class="btn">
+						<span>重置</span>
+						<span>确定</span>
+					</div>
+				</div>
+			</li>
+			<li>
+				<span class="tj">条件3 <i class="fa fa-caret-down"></i></span>
+				<div class="info">
+					<ul>
+						<li>选项（1）</li>
+						<li>选项（2）</li>
+						<li>选项（3）</li>
+						<li>选项（4）</li>
+						<li>选项（5）</li>
+						<li>选项（2）</li>
+						<li>选项（3）</li>
+						<li>选项（4）</li>
+						<li>选项（5）</li>
+						<li>选项（2）</li>
+						<li>选项（3）</li>
+						<li>选项（4）</li>
+						<li>选项（5）</li>
+					</ul>
+					<div class="btn">
+						<span>重置</span>
+						<span>确定</span>
+					</div>
+				</div>
+			</li>
+			<li>
+				<span class="tj sx">筛选 <i class="fa fa-filter"></i></span>
+				<div class="info bg">
+					<ul>
+						<li>选项（1）</li>
+						<li>选项（2）</li>
+						<li>选项（3）</li>
+						<li>选项（4）</li>
+						<li>选项（5）</li>
+					</ul>
+					<div class="btn">
+						<span>重置</span>
+						<span>确定</span>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+<ul class="char_content">
+
+	<li>
+		<h5>
+			<span>新增用户来源</span>
+			<i class="fa fa-question-circle"></i>
+		</h5>
+		<p class="helpinfo" style=" display: none">我是帮助我会隐藏</p>
+		<div class="content">
+			<div id="c1" style="height: 300px;"></div>
+		</div>
+	</li>
+	<li>
+		<h5>
+			<span>单设备账户数量分析</span>
+			<i class="fa fa-question-circle"></i>
+		</h5>
+		<p class="helpinfo" style=" display: none">我是帮助我会隐藏</p>
+		<div class="content">
+			<div id="c2" style="height: 300px;"></div>
+		</div>
+	</li>
+	<li>
+		<h5>
+			<span>玩家账户类型</span>
+			<i class="fa fa-question-circle"></i>
+		</h5>
+		<p class="helpinfo" style=" display: none">我是帮助我会隐藏</p>
+		<div class="content">
+			<div id="c3" style=""></div>
+		</div>
+	</li>
+	<li>
+		<h5>
+			<span>地区</span>
+			<i class="fa fa-question-circle"></i>
+		</h5>
+		<p class="helpinfo" style=" display: none">我是帮助我会隐藏</p>
+		<div class="content">
+			<div id="c4" style=""></div>
+		</div>
+	</li>
+	<li>
+		<h5>
+			<span>渠道</span>
+			<i class="fa fa-question-circle"></i>
+		</h5>
+		<p class="helpinfo" style=" display: none">我是帮助我会隐藏</p>
+		<div class="content">
+			<div id="c5" style=""></div>
+		</div>
+	</li>
+</ul>
+<div class="filtrate shadow"></div>
+<script type="text/javascript">
+$(function(){
+	$('.filtrate .tj').click(function(e){
+		e.preventDefault();
+		var parent=$(this).parent('li');
+		if(!parent.hasClass('active')){
+			var i=$(this).find('i.fa-caret-down');
+			parent.siblings('li').removeClass('active');
+			parent.addClass('active');
+			
+			$('.filtrate .tj>i.fa-caret-down').removeClass('fa-caret-up');
+			i.addClass('fa-caret-up');
+			$('.filtrate.shadow').show();
+		}else{
+			$('.filtrate>ul>li').removeClass('active');
+			$('.filtrate .tj>i.fa-caret-down').removeClass('fa-caret-up');
+			$('.filtrate.shadow').hide();
+		}
+	});
+
+	$('.filtrate.shadow').click(function(e){
+		e.preventDefault();
+		$('.filtrate>ul>li').removeClass('active');
+		$('.filtrate .tj>i.fa-caret-down').removeClass('fa-caret-up');
+		$(this).hide();
+	});
+
+	var chart ={
+		c1:{
+			obj:echarts.init($('#c1')[0],'walden'),
+			option:{
+			    tooltip: {
+			        trigger: 'item',
+			        formatter: "{a} <br/>{b}: {c} ({d}%)"
+			    },
+			    legend: {
+			        orient: 'vertical',
+			        x: 'left',
+			        y:'bottom',
+			        data:['联盟广告','视频广告','百度','谷歌','必应','其他']
+			    },
+			    series: [
+			        {
+			            name:'访问来源',
+			            type:'pie',
+			            selectedMode: 'single',
+			            radius: [0, '30%'],
+
+			            label: {
+			                normal: {
+			                    position: 'inner'
+			                }
+			            },
+			            labelLine: {
+			                normal: {
+			                    show: false
+			                }
+			            },
+			            data:[
+			                {value:335, name:'联盟广告', selected:true},
+			                {value:679, name:'营销广告'},
+			                {value:1548, name:'视频广告'}
+			            ]
+			        },
+			        {
+			            name:'访问来源',
+			            type:'pie',
+			            radius: ['40%', '55%'],
+
+			            data:[
+			                {value:234, name:'联盟广告'},
+			                {value:135, name:'视频广告'},
+			                {value:1048, name:'百度'},
+			                {value:251, name:'谷歌'},
+			                {value:147, name:'必应'},
+			                {value:102, name:'其他'}
+			            ]
+			        }
+			    ]
+			}
+		},
+		c2:{
+			obj:echarts.init($('#c2')[0],'walden'),
+			option:{
+			    tooltip : {
+			        trigger: 'axis'
+			    },
+			    legend: {
+			    	show:false,
+			        data:['新增设备']
+			    },
+			    calculable : true,
+			    xAxis : [
+			        {
+			            type : 'value',
+			            boundaryGap : [0, 0.01]
+			        }
+			    ],
+			    yAxis : [
+			        {
+			        	name :'注册数',
+			            type : 'category',
+			            data : ['6个','5个','4个','3个','2个','1个','0个']
+			        }
+			    ],
+			    series : [
+			        {
+			            name:'新增设备',
+			            type:'bar',
+			            data:[182, 23, 298, 104, 131, 630,0]
+			        }
+			    ]
+			}
+		}
+	}
+	$.each(chart,function(i,j){
+		j.obj.setOption(j.option);
+	});
+})
+</script>
